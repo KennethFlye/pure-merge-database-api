@@ -61,10 +61,15 @@ def get_articles():
 
 @app.route('/api/articles/<int:id>', methods=['GET'])
 def get_article(id):
-    #article = artcon.get_article(id)
-    #content = article.to_json()
-    content = json.dumps([artcon.get_article(id).to_json()]) # fix return statement, do smth with try i suppose
-    return Response(content, status=200, content_type='text/plain')
+    try:
+        #article = artcon.get_article(id)
+        #content = article.to_json()
+        content = json.dumps([artcon.get_article(id).to_json()]) # fix return statement, do smth with try i suppose
+        return Response(content, status=200, content_type='text/plain')
+    except:
+        return Response(content, status=404, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
+
+
 
 
 @app.route('/')
