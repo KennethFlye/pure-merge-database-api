@@ -1,5 +1,6 @@
 import psycopg as pgres
 from decouple import config
+
 from Model.Article import Article
 
 class DbArticle:
@@ -62,6 +63,7 @@ class DbArticle:
 
             articleList.append(foundArticle)
 
+        print(str(len(articleList)) + " articles found")
         return articleList
 
     def get_authors_by_article_id(self, article_id):

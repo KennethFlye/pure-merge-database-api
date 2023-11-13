@@ -4,7 +4,7 @@ import datetime
 class Article:
 
     """
-    def __init__(self, id, submitter, submitter_is_preferred, authors, authors_is_preferred, title, title_is_preferred, comments, comments_is_preferred, journalRef, journalRef_is_preferred, doi, doi_is_preferred, reportNumber, reportNumber_is_preferred, categories, categories_is_preferred, license, license_is_preferred, abstract, abstract_is_preferred, versions, versions_is_preferred, updateDate, updateDate_is_preferred, group):
+    def __init__(self, id, submitter, submitter_is_preferred, authors, authors_is_preferred, title, title_is_preferred, comments, comments_is_preferred, journalRef, journalRef_is_preferred, doi, doi_is_preferred, reportNumber, reportNumber_is_preferred, categories, categories_is_preferred, license, license_is_preferred, abstract, abstract_is_preferred, versions, versions_is_preferred, update_date, updateDate_is_preferred, group):
         self.id = id
         self.submitter = submitter
         self.submitter_is_preferred = submitter_is_preferred
@@ -36,10 +36,26 @@ class Article:
         pass
 
     def __str__(self):
-        return f'Id: {self.id}, submitter: {self.submitter}, author: {self.authors}, title: {self.title}, comments: {self.comments}, journalRef: {self.journal_ref}, doi: {self.doi}, reportNumber: {self.report_number}, categories: {self.categories}, license: {self.license}, abstract: {self.abstract}, versions: {self.versions}, updateDate: {self.update_date}'
+        return f'Id: {self.id}, submitter: {self.submitter}, author: {self.authors}, title: {self.title}, comments: {self.comments}, journalRef: {self.journal_ref}, doi: {self.doi}, reportNumber: {self.report_number}, categories: {self.categories}, license: {self.license}, abstract: {self.abstract}, versions: {self.versions}, update_date: {self.update_date}'
 
     def getListOfVariables(self):
-        variables = ['id', 'submitter', 'author', 'title', 'comments', 'journalRef', 'doi', 'reportNumber', 'categories', 'license', 'abstract', 'versions', 'updateDate']
+        variables = ['id', 'submitter', 'author', 'title', 'comments', 'journalRef', 'doi', 'reportNumber', 'categories', 'license', 'abstract', 'versions', 'update_date']
 
         return variables
 
+    def to_json(self):
+        return {
+            "Id": self.id,
+            "submitter": self.submitter,
+            "author": self.authors,
+            "title": self.title,
+            "comments": self.comments,
+            "journalRef": self.journal_ref,
+            "doi": self.doi,
+            "reportNumber": self.report_number,
+            "categories": self.categories,
+            "license": self.license,
+            "abstract": self.abstract,
+            "versions": self.versions,
+            "update_date": str(self.update_date),  # NOTE, DATE IS NOW A STRING, VERY BIG NOTE HERE PLS DON'T FORGET
+        }
