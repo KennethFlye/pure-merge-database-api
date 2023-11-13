@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 
 from Model.Article import *
 from Controller.ArticleController import *
@@ -12,13 +12,14 @@ artcon = ArticleController()
 def post_article():
     data = request.get_json()
     artc = Article(**data)
-    artcon.create_article(artc)
-    return "OK 201"  # STUB
+    content = artcon.create_article(artc)
+    return Response(content, status=201, content_type='text/plain')
 
 
 @app.route('/api/articles/<int:id>', methods=['GET'])
 def get_article(id):
-    return artcon.get_articles()
+    content = artcon.get_articles()
+    return Response(content, status=200, content_type='text/plain')
 
 
 @app.route('/')
@@ -28,7 +29,8 @@ def hello_world():  # put application's code here
 
 @app.route('/api')
 def help_route():  # put application's code here
-    return 'routes: \'/api\', \'/api/articles\' [GET & POST], \'/api/articles/{id}\' [GET]'
+    content = 'routes: \'/api\', \'/api/articles\' [GET & POST], \'/api/articles/{id}\' [GET]'
+    return Response(content, status=200, content_type='text/plain')
 
 
 if __name__ == '__main__':
