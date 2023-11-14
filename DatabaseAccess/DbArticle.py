@@ -12,9 +12,10 @@ class DbArticle:
 
     GetArticleByIdQuery = "SELECT * FROM Article WHERE id = %(articleId)s"
 
+    GetHighestGroupNumberQuery = "SELECT MAX(\"group\") FROM article"
 
     InsertArticleQuery = "INSERT INTO Article(submitter, submitter_is_preferred, authors_is_preferred, title, title_is_preferred, comments_is_preferred, journal_ref, journal_ref_is_preferred, doi, doi_is_preferred, report_number, report_number_is_preferred, categories_is_preferred, license, license_is_preferred, abstract, abstract_is_preferred, versions, versions_is_preferred, update_date, update_date_is_preferred, \"group\") VALUES (%(submitter)s, %(submitter_is_preferred)s, %(authors_is_preferred)s, %(title)s, %(title_is_preferred)s, %(comments_is_preferred)s, %(journal_ref)s, %(journal_ref_is_preferred)s, %(doi)s, %(doi_is_preferred)s, %(report_number)s, %(report_number_is_preferred)s, %(categories_is_preferred)s, %(license)s, %(license_is_preferred)s, %(abstract)s, %(abstract_is_preferred)s, %(versions)s, %(versions_is_preferred)s, %(update_date)s, %(update_date_is_preferred)s, %(group)s) RETURNING id;"
-    InsertCommentsQuery = "INSERT INTO \"Comment\"(commentary, article_id) VALUES (%(comment)s, %(article_id)s)"
+    InsertCommentsQuery = "INSERT INTO \"Comment\"(\"comment\", article_id) VALUES (%(comment)s, %(article_id)s)"
     InsertAuthorsQuery = "INSERT INTO author(\"name\") VALUES (%(author)s)"
     InsertCategoriesQuery = "INSERT INTO \"category\"(category) VALUES (%(category)s)"
 
@@ -32,6 +33,8 @@ class DbArticle:
         cursor = connection.cursor()
 
         #Group skal måske beregnes efter kaldet til api.
+        article.group = self.calculate_group_number()
+        
         cursor.execute(self.InsertArticleQuery, {'submitter': article.submitter, 'submitter_is_preferred': article.submitter_is_preferred, 'authors_is_preferred': article.authors_is_preferred, 'title': article.title, 'title_is_preferred': article.title_is_preferred, 'comments_is_preferred': article.comments_is_preferred, 'journal_ref': article.journal_ref, 'journal_ref_is_preferred': article.journal_ref_is_preferred, 'doi': article.doi, 'doi_is_preferred': article.doi_is_preferred, 'report_number': article.report_number, 'report_number_is_preferred': article.report_number_is_preferred, 'categories_is_preferred': article.categories_is_preferred, 'license': article.license, 'license_is_preferred': article.license_is_preferred, 'abstract': article.abstract, 'abstract_is_preferred': article.abstract_is_preferred, 'versions': article.version, 'versions_is_preferred': article.versions_is_preferred, 'update_date': article.update_date, 'update_date_is_preferred': article.update_date_is_preferred, 'group': article.group})
         return_id = cursor.fetchone()
         article.id = return_id[0]
@@ -189,6 +192,9 @@ class DbArticle:
                 cursor.execute(self.InsertCategoriesQuery, {"category": category})
             #Connect category and article in database
             cursor.execute(self.ConnectCategoryAndArticleQuery, {"article_id": article_id, 'category': category})
+
+    def calculate_group_number(self):
+        pass
 
 
 
