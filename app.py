@@ -72,7 +72,7 @@ def get_article(id):
     except ProgrammingError as e:
         return Response("None lol", status=404, content_type='text/plain')
     except:
-        return Response(content, status=500, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
+        return Response("general exception", status=404, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
 
 
 
