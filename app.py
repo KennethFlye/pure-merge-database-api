@@ -53,11 +53,18 @@ def get_articles():
     #     }
     # ]
 
-    content = json.dumps([article.to_json() for article in artcon.get_articles()])  # todo: fix format when kenneth is back
-    print(content)  # JSON format list of articles
+    try:
+        content = json.dumps([article.to_json() for article in artcon.get_articles()])
+        print(content)  # JSON format list of articles
 
-    # Return the JSON response with the correct content type
-    return Response(content, status=200, content_type='application/json')
+        # Return the JSON response with the correct content type
+        return Response(content, status=200, content_type='application/json')
+
+    except TypeError as e:
+        return Response("Error 404, articles not found", status=404, content_type='text/plain')
+    except:
+        return Response("Internal Server Error", status=500, content_type='text/plain')
+
 
 
 @app.route('/api/articles/<int:id>', methods=['GET'])
