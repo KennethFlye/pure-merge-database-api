@@ -5,7 +5,7 @@ from Model.Article import Article
 class DbArticle:
 
     GetAllArticlesQuery = "SELECT * FROM Article"
-    GetCommentsByArticleIdQuery = "SELECT commentary FROM \"Comment\" WHERE \"Comment\".article_id = %(articleId)s"
+    GetCommentsByArticleIdQuery = "SELECT \"comment\" FROM \"Comment\" WHERE \"Comment\".article_id = %(articleId)s"
     GetAuthorsByArticleIdQuery = "SELECT name FROM Author, article_author WHERE article_author.author_name = author.name AND article_author.article_id = %(articleId)s" #Måske problemer med keyword name
     GetCategoriesByArticleIdQuery = "SELECT category.category FROM category, article_category WHERE article_category.category = category.category AND article_category.article_id = %(articleId)s" #Måske problemer med keyword category
 
@@ -30,9 +30,6 @@ class DbArticle:
     def insert_article(self, article):
         connection = pgres.connect(host=config("HOST"), dbname=config("DATABASE"), user=config("USER"), password=config("PASSWORD"))
         cursor = connection.cursor()
-
-        #Group skal måske beregnes efter kaldet til api.
-        article.group = self.calculate_group_number()
         
         cursor.execute(self.InsertArticleQuery, {'submitter': article.submitter, 'submitter_is_preferred': article.submitter_is_preferred, 'authors_is_preferred': article.authors_is_preferred, 'title': article.title, 'title_is_preferred': article.title_is_preferred, 'comments_is_preferred': article.comments_is_preferred, 'journal_ref': article.journal_ref, 'journal_ref_is_preferred': article.journal_ref_is_preferred, 'doi': article.doi, 'doi_is_preferred': article.doi_is_preferred, 'report_number': article.report_number, 'report_number_is_preferred': article.report_number_is_preferred, 'categories_is_preferred': article.categories_is_preferred, 'license': article.license, 'license_is_preferred': article.license_is_preferred, 'abstract': article.abstract, 'abstract_is_preferred': article.abstract_is_preferred, 'versions': article.version, 'versions_is_preferred': article.versions_is_preferred, 'update_date': article.update_date, 'update_date_is_preferred': article.update_date_is_preferred, 'group': article.group})
         return_id = cursor.fetchone()
@@ -47,6 +44,7 @@ class DbArticle:
 
         #Catch Exception? For rollback eller sket det automatisk?
 
+        #connection.rollback()
         connection.commit()
 
     def get_article_by_id(self, article_id):
@@ -192,7 +190,16 @@ class DbArticle:
             cursor.execute(self.ConnectCategoryAndArticleQuery, {"article_id": article_id, 'category': category})
 
     def calculate_group_number(self):
-        pass
+        group_number = 0
+
+        cursor = self.connection.cursor()
+
+        cursor.execute(self.GetHighestGroupNumberQuery)
+        query_result = cursor.fetchone()
+
+        group_number = query_result[0]+1
+
+        return group_number
 
 
 
