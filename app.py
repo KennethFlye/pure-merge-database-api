@@ -65,16 +65,13 @@ def get_article(id):
     content = None
 
     try:
-        #article = artcon.get_article(id)
-        #content = article.to_json()
-
         content = json.dumps([artcon.get_article(id).to_json()])  # fix return statement, do smth with try i suppose
 
         return Response(content, status=200, content_type='text/plain')
     except TypeError as e:
-        return Response("None lol. " + e, status=404, content_type='text/plain')
+        return Response("Error 404, article not found", status=404, content_type='text/plain')
     except:
-        return Response(e, status=404, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
+        return Response("Internal Server Error", status=500, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
 
 
 
