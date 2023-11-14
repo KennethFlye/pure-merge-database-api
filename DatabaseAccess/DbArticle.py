@@ -6,7 +6,7 @@ from Model.Article import Article
 class DbArticle:
 
     GetAllArticlesQuery = "SELECT * FROM Article"
-    GetCommentsByArticleIdQuery = "SELECT commentary FROM \"Comment\" WHERE \"Comment\".article_id = %(articleId)s"
+    GetCommentsByArticleIdQuery = "SELECT comment FROM \"Comment\" WHERE \"Comment\".article_id = %(articleId)s"
     GetAuthorsByArticleIdQuery = "SELECT name FROM Author, article_author WHERE article_author.author_name = author.name AND article_author.article_id = %(articleId)s" #Måske problemer med keyword name
     GetCategoriesByArticleIdQuery = "SELECT category.category FROM category, article_category WHERE article_category.category = category.category AND article_category.article_id = %(articleId)s" #Måske problemer med keyword category
 
