@@ -1,4 +1,5 @@
 import json
+from sqlite3 import ProgrammingError
 
 from flask import Flask, request, jsonify, Response
 from Model.Article import *
@@ -65,11 +66,11 @@ def get_article(id):
         #article = artcon.get_article(id)
         #content = article.to_json()
 
-        if artcon.get_article(id) is None:
-            return Response("None lol", status=404, content_type='text/plain')
         content = json.dumps([artcon.get_article(id).to_json()])  # fix return statement, do smth with try i suppose
 
         return Response(content, status=200, content_type='text/plain')
+    except ProgrammingError as e:
+        return Response("None lol", status=404, content_type='text/plain')
     except:
         return Response(content, status=500, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
 
