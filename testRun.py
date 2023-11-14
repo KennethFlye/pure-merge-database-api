@@ -4,7 +4,7 @@ from datetime import time, datetime
 
 dbArticle = DbArticle()
 
-#dbArticle.get_all_articles()
+dbArticle.get_all_articles()
 #dbArticle.get_article_by_id(1)
 
 #dbArticle.insertArticleTest()
@@ -47,6 +47,6 @@ testArticle.versions_is_preferred = True
 testArticle.update_date = datetime.now()
 testArticle.update_date_is_preferred = True
 
-testArticle.group = 2
+#testArticle.group = 2
 
-dbArticle.insert_article(testArticle)
+#dbArticle.insert_article(testArticle)
