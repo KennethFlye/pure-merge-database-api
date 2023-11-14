@@ -241,7 +241,32 @@ class Article:
         self.group = group
     """
     def __init__(self):
-        pass
+        self.id = None
+        self.submitter = None
+        self.submitter_is_preferred = None
+        self.authors = None
+        self.authors_is_preferred = None
+        self.title = None
+        self.title_is_preferred = None
+        self.comments = None
+        self.comments_is_preferred = None
+        self.journal_ref = None
+        self.journal_ref_is_preferred = None
+        self.doi = None
+        self.doi_is_preferred = None
+        self.reportNumber = None
+        self.reportNumber_is_preferred = None
+        self.categories = None
+        self.categories_is_preferred = None
+        self.license = None
+        self.license_is_preferred = None
+        self.abstract = None
+        self.abstract_is_preferred = None
+        self.versions = None
+        self.versions_is_preferred = None
+        self.updateDate = None
+        self.updateDate_is_preferred = None
+        self.group = None
 
     def __str__(self):
         return f'Id: {self.id}, submitter: {self.submitter}, author: {self.authors}, title: {self.title}, comments: {self.comments}, journalRef: {self.journal_ref}, doi: {self.doi}, reportNumber: {self.report_number}, categories: {self.categories}, license: {self.license}, abstract: {self.abstract}, versions: {self.versions}, updateDate: {self.update_date}'
