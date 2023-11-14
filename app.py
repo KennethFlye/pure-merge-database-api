@@ -64,9 +64,10 @@ def get_article(id):
     try:
         #article = artcon.get_article(id)
         #content = article.to_json()
-        content = json.dumps([artcon.get_article(id).to_json()]) # fix return statement, do smth with try i suppose
+
         if artcon.get_article(id) is None:
             return Response("None lol", status=404, content_type='text/plain')
+        content = json.dumps([artcon.get_article(id).to_json()])  # fix return statement, do smth with try i suppose
 
         return Response(content, status=200, content_type='text/plain')
     except:
