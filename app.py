@@ -63,10 +63,7 @@ def get_articles():
 @app.route('/api/articles/<int:id>', methods=['GET'])
 def get_article(id):
     content = None
-    content = json.dumps([artcon.get_article(id).to_json()])  # fix return statement, do smth with try i suppose
-
-    return Response(content, status=200, content_type='text/plain')
-
+    
     try:
         #article = artcon.get_article(id)
         #content = article.to_json()
@@ -76,8 +73,8 @@ def get_article(id):
         return Response(content, status=200, content_type='text/plain')
     except ProgrammingError as e:
         return Response("None lol", status=404, content_type='text/plain')
-    except:
-        return Response("general exception", status=404, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
+    except Exception as e:
+        return Response(e, status=404, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
 
 
 
