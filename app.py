@@ -12,11 +12,14 @@ artcon = ArticleController()
 
 @app.route('/api/articles', methods=['POST'])
 def post_article():
-    data = request.get_json()
-    artc = Article(**data)
-    content = artcon.create_article(artc)
-    return Response(content, status=201, content_type='text/plain')
-
+    try:
+        data = request.get_json()
+        artc = Article(**data)
+        content = artcon.create_article(artc)
+        return Response(content, status=201, content_type='text/plain')
+    
+    except:
+        return Response("Internal Server Error", status=500, content_type='text/plain')
 
 @app.route('/api/articles', methods=['GET'])
 def get_articles():
