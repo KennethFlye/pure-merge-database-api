@@ -121,7 +121,7 @@ class DbArticle:
         return foundCategories
 
     def create_article_object(self, article):
-        foundArticle = article
+        foundArticle = Article()
 
         foundArticle.id = article[0]
         foundArticle.submitter = article[1]
@@ -205,7 +205,6 @@ class DbArticle:
         query_result = cursor.fetchone()
 
         group_number = query_result[0]+1
-
         return group_number
 
 

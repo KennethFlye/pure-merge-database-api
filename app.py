@@ -26,6 +26,7 @@ def post_article():
     except:
         return Response("Internal Server Error", status=500, content_type='text/plain')
 
+
 @app.route('/api/articles', methods=['GET'])
 def get_articles():
     # content = [
@@ -74,7 +75,6 @@ def get_articles():
         return Response("Internal Server Error", status=500, content_type='text/plain')
 
 
-
 @app.route('/api/articles/<int:id>', methods=['GET'])
 def get_article(id):
     content = None
@@ -86,9 +86,8 @@ def get_article(id):
     except TypeError as e:
         return Response("Error 404, article not found", status=404, content_type='text/plain')
     except:
-        return Response("Internal Server Error", status=500, content_type='text/plain') #Det er wack, skal nok fixe det, kh Oskar Scrum
-
-
+        return Response("Internal Server Error", status=500,
+                        content_type='text/plain')  # Det er wack, skal nok fixe det, kh Oskar Scrum
 
 
 @app.route('/')
@@ -100,6 +99,13 @@ def hello_world():  # put application's code here
 def help_route():  # put application's code here
     content = 'routes: \'/api\', \'/api/articles\' [GET & POST], \'/api/articles/{id}\' [GET]'
     return Response(content, status=200, content_type='text/plain')
+
+
+@app.route('/api/articles/getgroupnr')
+def get_highest_group():  # put application's code here
+    string = str(DbArticle().calculate_group_number())
+    return_content = '{"group_number":' + string + '}'
+    return Response(return_content, status=200, content_type='text/plain')
 
 
 if __name__ == '__main__':
