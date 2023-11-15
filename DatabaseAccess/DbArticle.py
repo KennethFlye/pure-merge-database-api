@@ -114,34 +114,34 @@ class DbArticle:
         return foundCategories
 
     def create_article_object(self, article):
-        foundArticle = Article()
+        foundArticle = article
 
-        foundArticle.id = article[0]
-        foundArticle.submitter = article[1]
-        foundArticle.submitter_is_preferred = article[2]
-        foundArticle.authors = self.get_authors_by_article_id(foundArticle.id)
-        foundArticle.authors_is_preferred = article[3]
-        foundArticle.title = article[4]
-        foundArticle.title_is_preferred = article[5]
-        foundArticle.comments = self.get_comments_by_article_id(foundArticle.id)
-        foundArticle.comments_is_preferred = article[6]
-        foundArticle.journal_ref = article[7]
-        foundArticle.journal_ref_is_preferred = article[8]
-        foundArticle.doi = article[9]
-        foundArticle.doi_is_preferred = article[10]
-        foundArticle.report_number = article[11]
-        foundArticle.report_number_is_preferred = article[12]
-        foundArticle.categories = self.get_categories_by_article_id(foundArticle.id)
-        foundArticle.categories_is_preferred = article[13]
-        foundArticle.license = article[14]
-        foundArticle.license_is_preferred = article[15]
-        foundArticle.abstract = article[16]
-        foundArticle.abstracts_is_preferred = article[17]
-        foundArticle.versions = article[18]
-        foundArticle.versions_is_preferred = article[19]
-        foundArticle.update_date = article[20]
-        foundArticle.update_date_is_preferred = article[21]
-        foundArticle.group = article[22]
+        # foundArticle.id = article[0]
+        # foundArticle.submitter = article[1]
+        # foundArticle.submitter_is_preferred = article[2]
+        # foundArticle.authors = self.get_authors_by_article_id(foundArticle.id)
+        # foundArticle.authors_is_preferred = article[3]
+        # foundArticle.title = article[4]
+        # foundArticle.title_is_preferred = article[5]
+        # foundArticle.comments = self.get_comments_by_article_id(foundArticle.id)
+        # foundArticle.comments_is_preferred = article[6]
+        # foundArticle.journal_ref = article[7]
+        # foundArticle.journal_ref_is_preferred = article[8]
+        # foundArticle.doi = article[9]
+        # foundArticle.doi_is_preferred = article[10]
+        # foundArticle.report_number = article[11]
+        # foundArticle.report_number_is_preferred = article[12]
+        # foundArticle.categories = self.get_categories_by_article_id(foundArticle.id)
+        # foundArticle.categories_is_preferred = article[13]
+        # foundArticle.license = article[14]
+        # foundArticle.license_is_preferred = article[15]
+        # foundArticle.abstract = article[16]
+        # foundArticle.abstract_is_preferred = article[17]
+        # foundArticle.versions = article[18]
+        # foundArticle.versions_is_preferred = article[19]
+        # foundArticle.update_date = article[20]
+        # foundArticle.update_date_is_preferred = article[21]
+        # foundArticle.group = article[22]
 
         return foundArticle
 

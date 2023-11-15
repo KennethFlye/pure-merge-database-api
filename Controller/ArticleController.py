@@ -10,7 +10,12 @@ class ArticleController:
 
     def get_articles(self):
         dba = DbArticle()
-        return dba.get_all_articles()
+
+        articles = dba.get_all_articles()
+        #for x in articles:
+        #    print(x.getListOfVariables())
+
+        return articles
 
     def get_article(self, id):
         dba = DbArticle()
