@@ -80,14 +80,14 @@ def get_article(id):
     content = None
 
     try:
-        content = json.dumps([artcon.get_article(id).to_json()])  # fix return statement, do smth with try i suppose
+        content = json.dumps([artcon.get_article(id).to_json()])
 
         return Response(content, status=200, content_type='text/plain')
     except TypeError as e:
         return Response("Error 404, article not found", status=404, content_type='text/plain')
     except:
         return Response("Internal Server Error", status=500,
-                        content_type='text/plain')  # Det er wack, skal nok fixe det, kh Oskar Scrum
+                        content_type='text/plain')
 
 
 @app.route('/')
