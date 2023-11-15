@@ -265,5 +265,6 @@ class Article:
             "versions": self.versions,
             "versions_is_preferred": self.versions_is_preferred,
             "update_date": str(self.update_date),  # NOTE, DATE IS NOW A STRING, VERY BIG NOTE HERE PLS DON'T FORGET
-            "update_date_is_preferred": self.update_date_is_preferred
+            "update_date_is_preferred": self.update_date_is_preferred,
+            "group": self.group
         }
