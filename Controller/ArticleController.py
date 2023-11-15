@@ -1,19 +1,17 @@
 from DatabaseAccess import DbArticle
 from DatabaseAccess.DbArticle import DbArticle
 
+import Model
+from Model.Article import Article
+
 
 class ArticleController:
 
-    def create_article(self, article):
-        dba = DbArticle
-        return dba.create_article_object(article)
+    def insert_article(self, article: Article):
+        return DbArticle().insert_article(article)
 
     def get_articles(self):
-        dba = DbArticle()
-
-        articles = dba.get_all_articles()
-        #for x in articles:
-        #    print(x.getListOfVariables())
+        articles = DbArticle().get_all_articles()
 
         return articles
 

@@ -27,7 +27,7 @@ class DbArticle:
     def __init__(self):
         self.connection = pgres.connect(host=config("HOST"), dbname=config("DATABASE"), user=config("USER"), password=config("PASSWORD"))
 
-    def insert_article(self, article):
+    def insert_article(self, article: Article):
         with pgres.connect(host=config("HOST"), dbname=config("DATABASE"), user=config("USER"), password=config("PASSWORD")) as connection:
             cursor = connection.cursor()
 
@@ -41,7 +41,7 @@ class DbArticle:
                             'report_number_is_preferred': article.report_number_is_preferred,
                             'categories_is_preferred': article.categories_is_preferred, 'license': article.license,
                             'license_is_preferred': article.license_is_preferred, 'abstract': article.abstract,
-                            'abstract_is_preferred': article.abstract_is_preferred, 'versions': article.version,
+                            'abstract_is_preferred': article.abstract_is_preferred, 'versions': article.versions,
                             'versions_is_preferred': article.versions_is_preferred, 'update_date': article.update_date,
                             'update_date_is_preferred': article.update_date_is_preferred, 'group': article.group})
             return_id = cursor.fetchone()

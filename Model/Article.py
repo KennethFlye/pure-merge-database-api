@@ -6,7 +6,7 @@ class Article:
     @property
     def id(self):
         return self._id
-    
+
     @id.setter
     def id(self, value):
         self._id = value
@@ -74,19 +74,19 @@ class Article:
     @comments_is_preferred.setter
     def comments_is_preferred(self, value):
         self._comments_is_preferred = value
-        
+
     @property
     def journal_ref(self):
         return self._journal_ref
-    
+
     @journal_ref.setter
     def journal_ref(self, value):
         self._journal_ref = value
-    
+
     @property
     def journal_ref_is_preferred(self):
         return self._journal_ref_is_preferred
-    
+
     @journal_ref_is_preferred.setter
     def journal_ref_is_preferred(self, value):
         self._journal_ref_is_preferred = value
@@ -106,11 +106,11 @@ class Article:
     @doi_is_preferred.setter
     def doi_is_preferred(self, value):
         self._doi_is_preferred = value
-        
+
     @property
     def report_number(self):
         return self._report_number
-    
+
     @report_number.setter
     def report_number(self, value):
         self._report_number = value
@@ -225,8 +225,8 @@ class Article:
         self.journal_ref_is_preferred = None
         self.doi = None
         self.doi_is_preferred = None
-        self.reportNumber = None
-        self.reportNumber_is_preferred = None
+        self.report_number = None
+        self.report_number_is_preferred = None
         self.categories = None
         self.categories_is_preferred = None
         self.license = None
@@ -235,27 +235,59 @@ class Article:
         self.abstract_is_preferred = None
         self.versions = None
         self.versions_is_preferred = None
-        self.updateDate = None
-        self.updateDate_is_preferred = None
+        self.update_date = None
+        self.update_date_is_preferred = None
         self.group = None
+
+    def fill_data(self, id, submitter, submitter_is_preferred, authors, authors_is_preferred, title, title_is_preferred,
+                  comments, comments_is_preferred, journal_ref, journal_ref_is_preferred, doi, doi_is_preferred,
+                  report_number, report_number_is_preferred, categories, categories_is_preferred, license,
+                  license_is_preferred, abstract, abstract_is_preferred, versions, versions_is_preferred,
+                  update_date, update_date_is_preferred, group):
+        self.id = id
+        self.submitter = submitter
+        self.submitter_is_preferred = submitter_is_preferred
+        self.authors = authors
+        self.authors_is_preferred = authors_is_preferred
+        self.title = title
+        self.title_is_preferred = title_is_preferred
+        self.comments = comments
+        self.comments_is_preferred = comments_is_preferred
+        self.journal_ref = journal_ref
+        self.journal_ref_is_preferred = journal_ref_is_preferred
+        self.doi = doi
+        self.doi_is_preferred = doi_is_preferred
+        self.report_number = report_number
+        self.report_number_is_preferred = report_number_is_preferred
+        self.categories = categories
+        self.categories_is_preferred = categories_is_preferred
+        self.license = license
+        self.license_is_preferred = license_is_preferred
+        self.abstract = abstract
+        self.abstract_is_preferred = abstract_is_preferred
+        self.versions = versions
+        self.versions_is_preferred = versions_is_preferred
+        self.update_date = update_date
+        self.update_date_is_preferred = update_date_is_preferred
+        self.group = group
 
     def to_json(self):
         return {
-            "Id": self.id,
+            "id": self.id,
             "submitter": self.submitter,
             "submitter_is_preferred": self.submitter_is_preferred,
-            "author": self.authors,
-            "author_is_preferred": self.authors_is_preferred,
+            "authors": self.authors,
+            "authors_is_preferred": self.authors_is_preferred,
             "title": self.title,
             "title_is_preferred": self.title_is_preferred,
             "comments": self.comments,
             "comments_is_preferred": self.comments_is_preferred,
-            "journalRef": self.journal_ref,
-            "journalRef_is_preferred": self.journal_ref_is_preferred,
+            "journal_ref": self.journal_ref,
+            "journal_ref_is_preferred": self.journal_ref_is_preferred,
             "doi": self.doi,
             "doi_is_preferred": self.doi_is_preferred,
-            "reportNumber": self.report_number,
-            "reportNumber_is_preferred": self.report_number_is_preferred,
+            "report_number": self.report_number,
+            "report_number_is_preferred": self.report_number_is_preferred,
             "categories": self.categories,
             "categories_is_preferred": self.categories_is_preferred,
             "license": self.license,
