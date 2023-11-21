@@ -14,12 +14,17 @@ artcon = ArticleController()
 
 @app.route('/api/articles', methods=['POST'])
 def post_article():
+    print('-------------posting to db')
+    artc = Article()
+    data = request.get_json()
+    print(data)
+    data2 = dict(*data)
+    print(data2)
+    artc.fill_data(*data2)
+    print(artc.title)
+    artcon.insert_article(artc)
+    pass
     try:
-        artc = Article()
-        data = request.get_json()
-        artc.fill_data(**data)
-        artcon.insert_article(artc)
-
         return Response("epic success", status=201, content_type='text/plain')
         pass
     except:
