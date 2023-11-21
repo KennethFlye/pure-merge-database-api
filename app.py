@@ -20,8 +20,8 @@ def post_article():
     print(data)
     data2 = dict(*data)
     print(data2)
-    artc.fill_data(*data2)
-    print(artc.title)
+    artc.fill_data(**data2)
+    print(str(artc.to_json()))
     artcon.insert_article(artc)
     pass
     try:

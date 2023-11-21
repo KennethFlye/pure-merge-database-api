@@ -239,36 +239,36 @@ class Article:
         self.update_date_is_preferred = None
         self.group = None
 
-    def fill_data(self, id, submitter, submitter_is_preferred, authors, authors_is_preferred, title, title_is_preferred,
+    def fill_data(self, submitter, submitter_is_preferred, authors, authors_is_preferred, title, title_is_preferred,
                   comments, comments_is_preferred, journal_ref, journal_ref_is_preferred, doi, doi_is_preferred,
                   report_number, report_number_is_preferred, categories, categories_is_preferred, license,
                   license_is_preferred, abstract, abstract_is_preferred, versions, versions_is_preferred,
                   update_date, update_date_is_preferred, group):
-        self.id = id
+        # self.id = id
         self.submitter = submitter
-        self.submitter_is_preferred = submitter_is_preferred
+        self.submitter_is_preferred = bool(submitter_is_preferred)
         self.authors = authors
-        self.authors_is_preferred = authors_is_preferred
+        self.authors_is_preferred = bool(authors_is_preferred)
         self.title = title
-        self.title_is_preferred = title_is_preferred
+        self.title_is_preferred = bool(title_is_preferred)
         self.comments = comments
-        self.comments_is_preferred = comments_is_preferred
+        self.comments_is_preferred = bool(comments_is_preferred)
         self.journal_ref = journal_ref
-        self.journal_ref_is_preferred = journal_ref_is_preferred
+        self.journal_ref_is_preferred = bool(journal_ref_is_preferred)
         self.doi = doi
-        self.doi_is_preferred = doi_is_preferred
+        self.doi_is_preferred = bool(doi_is_preferred)
         self.report_number = report_number
-        self.report_number_is_preferred = report_number_is_preferred
+        self.report_number_is_preferred = bool(report_number_is_preferred)
         self.categories = categories
-        self.categories_is_preferred = categories_is_preferred
+        self.categories_is_preferred = bool(categories_is_preferred)
         self.license = license
-        self.license_is_preferred = license_is_preferred
+        self.license_is_preferred = bool(license_is_preferred)
         self.abstract = abstract
-        self.abstract_is_preferred = abstract_is_preferred
+        self.abstract_is_preferred = bool(abstract_is_preferred)
         self.versions = versions
-        self.versions_is_preferred = versions_is_preferred
+        self.versions_is_preferred = bool(versions_is_preferred)
         self.update_date = update_date
-        self.update_date_is_preferred = update_date_is_preferred
+        self.update_date_is_preferred = bool(update_date_is_preferred)
         self.group = group
 
     def to_json(self):
