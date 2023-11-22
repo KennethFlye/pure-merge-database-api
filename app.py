@@ -17,15 +17,18 @@ def post_article():
     try:
         print('-------------posting to db')
         artc = Article()
+
         data = request.get_json()
         data = dict(*data)
+
         artc.fill_data(**data)
         print(str(artc.to_json()))
+
         artcon.insert_article(artc)
+
         return Response("epic success", status=201, content_type='text/plain')
-        pass
+
     except:
-        pass
         return Response("Internal Server Error", status=500, content_type='text/plain')
 
 
