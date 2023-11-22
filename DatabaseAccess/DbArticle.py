@@ -2,12 +2,12 @@ import psycopg as pgres
 from decouple import config
 from Model.Article import Article
 
-class DbArticle:
 
+class DbArticle:
     GetAllArticlesQuery = "SELECT * FROM Article"
     GetCommentsByArticleIdQuery = "SELECT \"comment\" FROM \"Comment\" WHERE \"Comment\".article_id = %(articleId)s"
-    GetAuthorsByArticleIdQuery = "SELECT name FROM Author, article_author WHERE article_author.author_name = author.name AND article_author.article_id = %(articleId)s" #Måske problemer med keyword name
-    GetCategoriesByArticleIdQuery = "SELECT category.category FROM category, article_category WHERE article_category.category = category.category AND article_category.article_id = %(articleId)s" #Måske problemer med keyword category
+    GetAuthorsByArticleIdQuery = "SELECT name FROM Author, article_author WHERE article_author.author_name = author.name AND article_author.article_id = %(articleId)s"  # Måske problemer med keyword name
+    GetCategoriesByArticleIdQuery = "SELECT category.category FROM category, article_category WHERE article_category.category = category.category AND article_category.article_id = %(articleId)s"  # Måske problemer med keyword category
 
     GetArticleByIdQuery = "SELECT * FROM Article WHERE id = %(articleId)s"
 
@@ -25,10 +25,12 @@ class DbArticle:
     DoesAuthorExistQuery = "SELECT CASE WHEN EXISTS (SELECT * FROM author WHERE \"name\"=%(author_name)s)THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END"
 
     def __init__(self):
-        self.connection = pgres.connect(host=config("HOST"), dbname=config("DATABASE"), user=config("USER"), password=config("PASSWORD"))
+        self.connection = pgres.connect(host=config("HOST"), dbname=config("DATABASE"), user=config("USER"),
+                                        password=config("PASSWORD"))
 
     def insert_article(self, article: Article):
-        with pgres.connect(host=config("HOST"), dbname=config("DATABASE"), user=config("USER"), password=config("PASSWORD")) as connection:
+        with pgres.connect(host=config("HOST"), dbname=config("DATABASE"), user=config("USER"),
+                           password=config("PASSWORD")) as connection:
             cursor = connection.cursor()
 
             cursor.execute(self.InsertArticleQuery,
@@ -156,9 +158,9 @@ class DbArticle:
         for author in authors:
             if not self.author_exists(cursor, author):
                 cursor.execute(self.InsertAuthorsQuery, {'author': author})
-            #Connect author and article in database
+            # Connect author and article in database
             cursor.execute(self.ConnectAuthorAndArticleQuery, {'article_id': article_id, 'author_name': author})
-        #Return Boolean?
+        # Return Boolean?
 
     def author_exists(self, cursor, author):
         author_exists = False
@@ -167,7 +169,7 @@ class DbArticle:
 
         query_result = cursor.fetchone()
 
-        if query_result[0] == 1:
+        if query_result[0] == "1":
             author_exists = True
 
         return author_exists
@@ -179,13 +181,13 @@ class DbArticle:
 
         query_result = cursor.fetchone()
 
-        if query_result[0] == 1:
+        if query_result[0] == "1":
             category_exists = True
 
         return category_exists
 
     def insert_comments(self, cursor, comments, article_id):
-        #Kig på om databasen skal ændres, da der ikke kan komme samme comment string 2 gange. Kan være den skal have en id kolonne
+        # Kig på om databasen skal ændres, da der ikke kan komme samme comment string 2 gange. Kan være den skal have en id kolonne
         for comment in comments:
             cursor.execute(self.InsertCommentsQuery, {'comment': comment, 'article_id': article_id})
 
@@ -193,7 +195,7 @@ class DbArticle:
         for category in categories:
             if not self.category_exists(cursor, category):
                 cursor.execute(self.InsertCategoriesQuery, {"category": category})
-            #Connect category and article in database
+            # Connect category and article in database
             cursor.execute(self.ConnectCategoryAndArticleQuery, {"article_id": article_id, 'category': category})
 
     def calculate_group_number(self):
@@ -204,10 +206,5 @@ class DbArticle:
         cursor.execute(self.GetHighestGroupNumberQuery)
         query_result = cursor.fetchone()
 
-        group_number = query_result[0]+1
+        group_number = query_result[0] + 1
         return group_number
-
-
-
-
-
